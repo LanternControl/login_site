@@ -24,6 +24,8 @@ app.get('/login', function(req, res){
 });
 
 
+
+
 app.post('/login', function(req, res){
  let username = req.body.username;
  let password = req.body.password;
@@ -32,14 +34,15 @@ for (let i = 0; i < data.users.length; i++) {
    if (username === data.users[i].username && password === data.users[i].password) {
      console.log('hell yeah');
      req.session.authenticated = true;
-     app.get('/userpage', function(req, res){
-       res.render('userpage', {username: username});
-     });
      res.redirect('/userpage')
   } else if (username !== data.users[i].username || password !== data.users[i].password) {
      res.redirect('/login');
   }
 }
+app.get('/userpage', function(req, res){
+  res.render('userpage', {username: username});
+});
+
 
  // if (username && password) {
  //  console.log('logged in!');
